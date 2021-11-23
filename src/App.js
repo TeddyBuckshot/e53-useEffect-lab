@@ -5,10 +5,16 @@ function App() {
 
   let [number, setNumber] = useState(1);
   let [answer, setAnswer] = useState("1");
+  let [name, setName] = useState("anonymous")
 
   const handleInc = () => {
     setNumber(number + 1);
   }
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  }
+
 
   useEffect(() => {
     if (number % 3 === 0 && number % 5 === 0) {
@@ -28,6 +34,13 @@ function App() {
 
       <h1>Number is: {number}</h1>
       <h2>Output: {answer}</h2>
+
+      <form>
+        <input type="text" placeholder="Enter name" value={name} onChange={handleNameChange}/>
+      </form>
+
+      <h3>Proving useEffect isn't listening: {name}</h3>
+
     </>
     
   );
