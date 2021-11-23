@@ -4,17 +4,23 @@ import './App.css';
 function App() {
 
   let [number, setNumber] = useState(1);
-  let [answer, setAnswer] = useState("1");
-  let [name, setName] = useState("anonymous")
+  let [answer, setAnswer] = useState("");
+  let [UserInput, setUserInput] = useState("")
+  let [name, setName] = useState("")
 
   const handleInc = () => {
     setNumber(number + 1);
-  }
+  };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  }
+  const handleNameInput = (event) => {
+    setUserInput(event.target.value);
+  };
 
+  const displayName = (event) => {
+    event.preventDefault()
+    setName(UserInput);
+    setUserInput("")
+  };
 
   useEffect(() => {
     if (number % 3 === 0 && number % 5 === 0) {
@@ -30,16 +36,16 @@ function App() {
 
   return (
     <>
-      <button value={number} onClick={handleInc}>Next turn</button>
 
+      <button value={number} onClick={handleInc}>Next turn</button>
       <h1>Number is: {number}</h1>
       <h2>Output: {answer}</h2>
 
       <form>
-        <input type="text" placeholder="Enter name" value={name} onChange={handleNameChange}/>
+        <input type="text" placeholder="Enter name" value={UserInput} onChange={handleNameInput}/>
+        <button onClick={displayName}>Submit</button>
       </form>
-
-      <h3>Proving useEffect isn't listening: {name}</h3>
+      <h3>The name you entered is: {name}</h3>
 
     </>
     
